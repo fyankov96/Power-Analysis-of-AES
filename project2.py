@@ -79,8 +79,8 @@ def PearsonCorr(H_column, T_column):
 def CorrTable(T, H):
     CorrTable = np.zeros((55,256), dtype=np.float32)
     for keyguess in range(256):
-        for trace in range(55):
-            CorrTable[trace, keyguess] = PearsonCorr(H[:,keyguess], T[:,trace])
+        for sample in range(55):
+            CorrTable[sample, keyguess] = PearsonCorr(H[:,keyguess], T[:,sample])
     return CorrTable
 
 # T = readT('T_test.dat')
