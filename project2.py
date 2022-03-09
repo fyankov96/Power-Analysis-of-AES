@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 
 ##### 1. Laoding data into numpy arrays #####
 # Example use:
-# T = readT('T0.dat')
 def readT(filename):
     return np.loadtxt(filename, delimiter = ",")
 
@@ -48,7 +47,6 @@ SBOX = [0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5,
 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16]
 
 # Example use
-# H = constructH('inputs0.dat')
 def constructH(filename):
     inputs0 = np.loadtxt(filename, delimiter = ",", dtype = int)
     H = np.zeros((600,256), dtype=np.uint32)
@@ -70,10 +68,10 @@ def CorrTable(T, H):
             CorrTable[sample, keyguess] = PearsonCorr(H[:,keyguess], T[:,sample])
     return CorrTable
 
-T = readT('T_test.dat')
-H = constructH('inputs_test.dat')
-#T = readT('T0.dat')
-#H = constructH('inputs0.dat')
+#T = readT('T_test.dat')
+#H = constructH('inputs_test.dat')
+T = readT('T0.dat')
+H = constructH('inputs0.dat')
 
 corr_table = CorrTable(T, H)
 (x, y) = np.unravel_index(np.argmax(abs(corr_table), axis=None), corr_table.shape)
