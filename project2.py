@@ -2,10 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 ##### 1. Laoding data into numpy arrays #####
-def readT(filename):
-    return np.loadtxt(filename, delimiter = ",")
 # Example use:
 # T = readT('T0.dat')
+def readT(filename):
+    return np.loadtxt(filename, delimiter = ",")
+
 
 def HammingWeightOfByte(n):
     return bin(n).count("1")
@@ -46,6 +47,8 @@ SBOX = [0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5,
 0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68,
 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16]
 
+# Example use
+# H = constructH('inputs0.dat')
 def constructH(filename):
     inputs0 = np.loadtxt(filename, delimiter = ",", dtype = int)
     H = np.zeros((600,256), dtype=np.uint32)
@@ -53,8 +56,6 @@ def constructH(filename):
         for keyguess in range(256):
             H[i,keyguess] = HammingWeightOfByte(SBOX[inputs0[i]^keyguess])
     return H
-# Example use
-# H = constructH('inputs0.dat')
 
 ##### 4. Pearson correlation #####
 def PearsonCorr(H_column, T_column):
@@ -74,8 +75,6 @@ def CorrTable(T, H):
 T = readT('T0.dat')
 H = constructH('inputs0.dat')
 
-CorrTable = CorrTable(T, H)
-max_pos_index = np.unravel_index(np.argmax(CorrTable, axis=None), CorrTable.shape)
-max_neg_index = np.unravel_index(np.argmax(abs(CorrTable), axis=None), CorrTable.shape)
-print('Biggest positive correlation is ', np.amax(CorrTable), ' with index ', max_pos_index)
-print('Biggest negative correlation is ', -np.amax(abs(CorrTable)), ' with index ', max_neg_index)
+corr_table = CorrTable(T, H)
+(x, y) = np.unravel_index(np.argmax(abs(corr_table), axis=None), corr_table.shape)
+print('Biggest correlation is ', corr_table[x, y], ' with index ', (x, y))
