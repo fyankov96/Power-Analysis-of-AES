@@ -16,8 +16,6 @@ def decimalToBinary(n):
     # and removing the prefix(0b)
     return bin(n).replace("0b", "")
 
-n = decimalToBinary(205)
-
 def HammingWeightOfByte(n):
     n = decimalToBinary(n)
     HammingWeight = 0
