@@ -7,22 +7,8 @@ def readT(filename):
 # Example use:
 # T = readT('T0.dat')
 
-##### 2. Hamming weight of byte #####
-# Taken from https://www.scaler.com/topics/convert-decimal-to-binary-in-python/
-# Function to convert decimal to binary
-# using built-in python function
-def decimalToBinary(n):
-    # converting decimal to binary
-    # and removing the prefix(0b)
-    return bin(n).replace("0b", "")
-
 def HammingWeightOfByte(n):
-    n = decimalToBinary(n)
-    HammingWeight = 0
-    for i in range(len(n)):
-        if n[i] == '1':
-            HammingWeight += 1
-    return HammingWeight
+    return bin(n).count("1")
 
 
 ##### 3. Construct H-table #####
