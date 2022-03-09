@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 ##### 1. Laoding data into numpy arrays #####
-# Example use:
 def readT(filename):
     return np.loadtxt(filename, delimiter = ",")
 
@@ -46,7 +45,6 @@ SBOX = [0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5,
 0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68,
 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16]
 
-# Example use
 def constructH(filename):
     inputs0 = np.loadtxt(filename, delimiter = ",", dtype = int)
     H = np.zeros((600,256), dtype=np.uint32)
