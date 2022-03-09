@@ -70,11 +70,13 @@ def CorrTable(T, H):
             CorrTable[sample, keyguess] = PearsonCorr(H[:,keyguess], T[:,sample])
     return CorrTable
 
-# T = readT('T_test.dat')
-# H = constructH('inputs_test.dat')
-T = readT('T0.dat')
-H = constructH('inputs0.dat')
+T = readT('T_test.dat')
+H = constructH('inputs_test.dat')
+#T = readT('T0.dat')
+#H = constructH('inputs0.dat')
 
 corr_table = CorrTable(T, H)
 (x, y) = np.unravel_index(np.argmax(abs(corr_table), axis=None), corr_table.shape)
-print('Biggest correlation is ', corr_table[x, y], ' with index ', (x, y))
+print('Best key   : ', y)
+print('correlation: ', corr_table[x, y])
+print('time stamp : ', x)
