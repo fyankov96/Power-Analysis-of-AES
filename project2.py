@@ -76,3 +76,18 @@ corr_table = CorrTable(T, H)
 print('Best key   : ', y)
 print('correlation: ', corr_table[x, y])
 print('time stamp : ', x)
+
+# Getting the N best correlations
+N = 5
+ind0 = np.argpartition(abs(corr_table.ravel()), -N)[-N:]
+ind = ind0[corr_table.ravel()[ind0].argsort()][::-1]
+(row, col) = np.unravel_index(ind, corr_table.shape)
+print('Indices of best absolute correlations (for some reason in reverse order): ', [row, col])
+print('The largest absolute correlations (for some reason in reverse order): ', corr_table[row, col])
+
+##### Plot of max correlation for each key guess #####
+plt.bar(list(range(256)), np.amax(abs(corr_table), axis = 0))
+plt.xlabel('Key guess')
+plt.ylabel('Maximum absolute correlation')
+plt.savefig('largestAbsCorrForEachKey.png')
+plt.show()
